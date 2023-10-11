@@ -46,7 +46,7 @@ exports.edit = async(req, res) => {
 
 
         const userData = await blog.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
-        res.json({ data: userData });
+        res.json({ message: "success", data: userData });
     } catch (err) {
         res.status(500).json(err)
     }
@@ -56,14 +56,12 @@ exports.delete = async(req, res) => {
     const userData = await blog.findByIdAndDelete(req.params.id);
     try {
         if (!userData) {
-            res.status(400).json({ message: "user not found." });
+            res.status(400).json({ message: "form not found." });
         }
-        res.status(200).json({ message: 'user deleted successfully' });
+        res.status(200).json({ message: 'success' });
     } catch (err) {
         res.status(500).json(err)
     }
-
-
 }
 
 exports.getByUserId = async(req, res) => {
