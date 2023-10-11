@@ -71,10 +71,8 @@ exports.getById = async(req, res) => {
 }
 exports.edit = async(req, res) => {
     try {
-
-
         const userData = await user.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
-        res.json({ data: userData });
+        res.json({ message: 'updated successfully', data: userData });
     } catch (err) {
         res.status(500).json(err)
     }
