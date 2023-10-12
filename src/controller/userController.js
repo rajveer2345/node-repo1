@@ -1,5 +1,6 @@
 const user = require('../schema/userSchema');
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
 
 
 exports.login = async(req, res) => {
@@ -19,7 +20,11 @@ exports.login = async(req, res) => {
         const passwordMatch = await bcrypt.compare(req.body.password, userData.password);
 
         if (passwordMatch) {
-            res.json({ message: "success", data: userData }); //jsonwebtoken
+
+            const apptoken = jwt.sign({ userId: userData.id }, 'xxxxxxxxxxxxxxx', { expiresIn: '1h' });
+
+
+            res.json({ message: "success", data: userData, token: apptoken }); //jsonwebtoken
         } else {
             res.json({ message: "Username or password don't match" });
         }
@@ -71,10 +76,8 @@ exports.getById = async(req, res) => {
 }
 exports.edit = async(req, res) => {
     try {
-
-
         const userData = await user.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
-        res.json({ data: userData });
+        res.json({ message: 'updated successfully', data: userData });
     } catch (err) {
         res.status(500).json(err)
     }
