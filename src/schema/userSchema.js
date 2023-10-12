@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 const { ObjectId } = mongoose.Schema.Types;
 
 const userSchema = mongoose.Schema({
+        image: {
+            type: String
+        },
         username: {
             type: String
         },
