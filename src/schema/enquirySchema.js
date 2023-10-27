@@ -1,19 +1,21 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const { ObjectId } = mongoose.Schema.Types;
-const blogSchema = mongoose.Schema({
 
-        image: {
+const enquirySchema = mongoose.Schema({
+        name: {
             type: String
         },
-        title: {
+       
+        email: {
             type: String
         },
-        desc: {
+        subject: {
             type: String
         },
-        category: {
-            type: String
+        message:
+        {
+            type:String
         },
         userId: {
             type: ObjectId,
@@ -25,5 +27,5 @@ const blogSchema = mongoose.Schema({
 
 );
 
-const blog = mongoose.model('blog', blogSchema);
-module.exports = blog;
+const enquiry = mongoose.model('enquiry', enquirySchema);
+module.exports = enquiry;

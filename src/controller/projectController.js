@@ -1,4 +1,4 @@
-const blog = require('../schema/blogSchema');
+const project = require('../schema/projectSchema');
 
 
 exports.add = async(req, res) => {
@@ -7,20 +7,19 @@ exports.add = async(req, res) => {
         // console.log(req.body);
         // const salt = await bcrypt.genSalt(10);
         // req.body.password = await bcrypt.hash(req.body.password, salt)
-        const userData = new blog(req.body);
+        const userData = new project(req.body);
         await userData.save();
-        res.json({ message: "blog added successfully", data: userData });
+        res.json({ message: "project added successfully", data: userData });
     } catch (err) {
         res.status(500).json(err)
     }
 };
-
 exports.getAll = async(req, res) => {
 
 
     try {
 
-        let userData = await blog.find().sort({createdAt:-1})
+        let userData = await project.find().sort({createdAt:-1})
 
         res.json(userData);
     } catch (error) {
@@ -36,7 +35,7 @@ exports.getAll = async(req, res) => {
 
 exports.getById = async(req, res) => {
     try {
-        const data = await blog.findById(req.params.id)
+        const data = await project.findById(req.params.id)
         res.json({ data: data })
     } catch (err) {
         res.status(500).json(err)
@@ -46,7 +45,7 @@ exports.edit = async(req, res) => {
     try {
 
 
-        const userData = await blog.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
+        const userData = await project.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
         res.json({ message: "success", data: userData });
     } catch (err) {
         res.status(500).json(err)
@@ -54,7 +53,7 @@ exports.edit = async(req, res) => {
 }
 exports.delete = async(req, res) => {
 
-    const userData = await blog.findByIdAndDelete(req.params.id);
+    const userData = await project.findByIdAndDelete(req.params.id);
     try {
         if (!userData) {
             res.status(400).json({ message: "form not found." });
@@ -67,7 +66,7 @@ exports.delete = async(req, res) => {
 
 exports.getByUserId = async(req, res) => {
     try {
-        const data = await blog.findOne({ userId: req.params.id })
+        const data = await project.findOne({ userId: req.params.id })
         res.json({ data: data })
     } catch (err) {
         res.status(500).json(err)
@@ -79,7 +78,7 @@ exports.getByUserId = async(req, res) => {
 exports.getByTitle = async(req, res) => {
     try {
         let title = new RegExp(req.params.title,'i')
-        const data = await blog.find({title:title})
+        const data = await project.find({title:title})
         return res.json({ data: data })
     } catch (err) {
         res.status(500).json(err)

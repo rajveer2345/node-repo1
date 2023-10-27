@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const { ObjectId } = mongoose.Schema.Types;
-const blogSchema = mongoose.Schema({
 
+const projectSchema = mongoose.Schema({
         image: {
             type: String
         },
@@ -14,10 +14,17 @@ const blogSchema = mongoose.Schema({
         },
         category: {
             type: String
+        }, 
+        type:
+        {
+            type:String,
+    
+        },
+        url: {
+            type: String
         },
         userId: {
             type: ObjectId,
-            ref: 'user'
         }
     }, {
         timestamps: true
@@ -25,5 +32,5 @@ const blogSchema = mongoose.Schema({
 
 );
 
-const blog = mongoose.model('blog', blogSchema);
-module.exports = blog;
+const project = mongoose.model('project', projectSchema);
+module.exports = project;

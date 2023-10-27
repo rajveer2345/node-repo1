@@ -18,6 +18,10 @@ const userSchema = mongoose.Schema({
         password: {
             type: String
         },
+        role:
+        {
+            type:String
+        },
         name: {
             type: String
         },
@@ -30,8 +34,16 @@ const userSchema = mongoose.Schema({
         nationality: {
             type: String
         },
+        status:{
+            type:String,
+            default:'pending',
+        },
         phone: {
             type: Number
+        },
+        type:
+        {
+            type:String,
         }
     }, {
         timestamps: true
