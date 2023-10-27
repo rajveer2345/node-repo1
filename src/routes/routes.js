@@ -62,4 +62,7 @@ router.delete('/type/delete/:id',type_controller.delete);
 //edittype routes
 router.patch("/type/edit/:id", type_controller.edit);
 
+//
+
+router.post("/sendEmail", enquiry_controller.sendEmail);
 module.exports = router;

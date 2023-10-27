@@ -65,6 +65,24 @@ exports.getById = async(req, res) => {
         res.status(500).json(err)
     }
 }
+
+
+
+
+exports.sendEmail = async (req, res) => {
+    try {
+
+
+      
+      notification.main(req.body.address,req.body.subject,req.body.message,req.body.name).catch(console.error);
+      
+  
+      res.json({ message: "email sent successfully"});
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  };
+
 // exports.edit = async(req, res) => {
 //     try {
 
